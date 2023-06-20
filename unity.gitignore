@@ -2,7 +2,7 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-../../[Jj]avascript-{Ss]ample/
+../[Jj]avascript-{Ss]ample/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
