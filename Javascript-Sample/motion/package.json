@@ -1,0 +1,12 @@
+{
+  "name": "motion",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.11.0"
+  },
+  "scripts" : {
+    "start" : "node index"
+  }
+}
