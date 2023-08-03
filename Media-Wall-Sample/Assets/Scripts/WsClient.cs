@@ -9,6 +9,7 @@ using NativeWebSocket;
 public class WsClient : MonoBehaviour
 {
     WebSocket websocket;
+    public WsToSkeleton wsSkeleton;
     [SerializeField] Text textfield;
     string wsLastMessage = "No Message";
 
@@ -36,7 +37,8 @@ public class WsClient : MonoBehaviour
         {
             // getting the message as a string
             wsLastMessage = System.Text.Encoding.UTF8.GetString(bytes);
-            Debug.Log("OnMessage! " + wsLastMessage);
+            wsSkeleton.UpdateWsSkeleton(bytes);
+            //Debug.Log("OnMessage! " + wsLastMessage);
         };
 
         // Keep sending messages at every 0.3s
