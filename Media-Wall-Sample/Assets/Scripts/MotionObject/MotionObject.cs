@@ -71,6 +71,13 @@ public class MotionObject : MonoBehaviour
 
             UpdateMotionObject();
         }
+        else
+        {
+            foreach (var skelly in Skeletons)
+            {
+                Destroy(skelly.gameObject);
+            }
+        }
     }
 
     protected virtual void UpdateMotionObject()
