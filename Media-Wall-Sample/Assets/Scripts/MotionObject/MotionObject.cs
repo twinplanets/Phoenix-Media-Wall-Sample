@@ -25,6 +25,7 @@ public class MotionObject : MonoBehaviour
     public Vector3 scaleFactor;
     [SerializeField] protected Skeleton[] _skeletons;
     [SerializeField] protected GameObject[] Skeletons;
+    [SerializeField] [Min(1)] protected int maxSkeletons = 5;
     //public bool debugSkeleton = false;
     //public GameObject wsSkeleton;
 
@@ -40,21 +41,24 @@ public class MotionObject : MonoBehaviour
         {
             //Checks the size of _skeletons against Skeletons to ensure the arrays match in number of captured skeletons
             #region ArrayResizing
+
+            int maxLength = Mathf.Clamp(_skeletons.Length, 0, maxSkeletons);
+
             //Delete excess skeletons
-            if (Skeletons.Length > _skeletons.Length)
+            if (Skeletons.Length > maxLength)
             {
-                for (int i = Skeletons.Length - 1; i > _skeletons.Length - 1; i--)
+                for (int i = Skeletons.Length - 1; i > maxLength; i--)
                 {
                     Debug.Log(i);
                     Destroy(Skeletons[i].gameObject);
                 }
-                System.Array.Resize(ref Skeletons, _skeletons.Length);
+                System.Array.Resize(ref Skeletons, maxLength);
             }
 
             //Expand array to fit skeletons
-            if (Skeletons.Length < _skeletons.Length)
+            if (Skeletons.Length < maxSkeletons)
             {
-                System.Array.Resize(ref Skeletons, _skeletons.Length);
+                System.Array.Resize(ref Skeletons, maxLength);
             }
             #endregion 
 
@@ -70,6 +74,13 @@ public class MotionObject : MonoBehaviour
             //}
 
             UpdateMotionObject();
+        }
+        else
+        {
+            foreach (var skelly in Skeletons)
+            {
+                Destroy(skelly.gameObject);
+            }
         }
     }
 

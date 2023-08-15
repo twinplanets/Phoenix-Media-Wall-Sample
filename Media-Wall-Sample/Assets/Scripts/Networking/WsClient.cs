@@ -90,7 +90,7 @@ public class WsClient : MonoBehaviour
 
 public class WsSampleTransmitter : MonoBehaviour
 {
-    public string fileName = "full-1.txt";
+    public string fileName = "full-2.txt";
     private string line;
     private string[] lines;
     private int currentIndex;
