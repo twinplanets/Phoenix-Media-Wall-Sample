@@ -47,9 +47,8 @@ public class MotionObject : MonoBehaviour
             //Delete excess skeletons
             if (Skeletons.Length > maxLength)
             {
-                for (int i = Skeletons.Length - 1; i > maxLength; i--)
+                for (int i = Skeletons.Length-1; i > maxLength-1; i--)
                 {
-                    Debug.Log(i);
                     Destroy(Skeletons[i].gameObject);
                 }
                 System.Array.Resize(ref Skeletons, maxLength);
@@ -61,17 +60,6 @@ public class MotionObject : MonoBehaviour
                 System.Array.Resize(ref Skeletons, maxLength);
             }
             #endregion 
-
-            ////Instantiate WS Skeleton for each Skeleton tracked
-            //for (int i = 0; i < _skeletons.Length; i++)
-            //{
-            //    if (Skeletons[i] == null)
-            //    {
-            //        Skeletons[i] = Instantiate<GameObject>(wsSkeleton);
-            //        Skeletons[i].GetComponent<WsSkeleton>().InstantiateSkeleton(_skeletons[i]);
-            //    }
-            //    Skeletons[i].GetComponent<WsSkeleton>().UpdateSkeleton(_skeletons[i]);
-            //}
 
             UpdateMotionObject();
         }

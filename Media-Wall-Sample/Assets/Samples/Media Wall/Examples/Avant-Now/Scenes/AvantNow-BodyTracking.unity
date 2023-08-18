@@ -187,6 +187,7 @@ Transform:
   - {fileID: 733067951}
   - {fileID: 700099416}
   - {fileID: 2016035378}
+  - {fileID: 337377174}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &215444158
@@ -268,6 +269,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215444158}
   m_CullTransparentMesh: 1
+--- !u!1 &337377173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 337377174}
+  - component: {fileID: 337377175}
+  m_Layer: 0
+  m_Name: Debug Motion Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &337377174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337377173}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 141074845}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &337377175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337377173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f967826ec9124446b48b46b0c5e0472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: {x: 0, y: 0, z: 0}
+  _skeletons: []
+  Skeletons: []
+  maxSkeletons: 5
 --- !u!1 &700099415
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   motionObjects:
   - {fileID: 2016035379}
+  - {fileID: 337377175}
   textfield: {fileID: 0}
   SampleDataStream: 1
 --- !u!1 &705507993
@@ -515,19 +565,19 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 1.4039162
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
   m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_SensorSize: {x: 5.79, y: 4.01}
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -537,7 +587,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 110
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -563,13 +613,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 9, z: 20}
+  m_LocalRotation: {x: 0, y: 0.9659258, z: -0.2588191, w: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1241366095}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 180, z: 0}
 --- !u!1 &1189783143
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,7 +935,7 @@ GameObject:
   - component: {fileID: 2016035378}
   - component: {fileID: 2016035379}
   m_Layer: 0
-  m_Name: Rainbow AvatarIK Motion Manager
+  m_Name: Avatar Transform Motion Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -915,7 +965,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2016035377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c553598365eea9146a4a045801effba2, type: 3}
+  m_Script: {fileID: 11500000, guid: 28af6559f7122b348bb85aa7d2c8fa5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scaleFactor: {x: 0, y: 0, z: 0}
@@ -923,15 +973,6 @@ MonoBehaviour:
   Skeletons: []
   maxSkeletons: 5
   HumanoidAvatarPrefab: {fileID: 1750171076509550606, guid: ddde999c8e77ac748bd7e9c691d3fed9, type: 3}
-  Materials:
-  - {fileID: 2100000, guid: 16afddd78b5e3614a98e91a695de8e76, type: 2}
-  - {fileID: 2100000, guid: b05b83dbf989e774490f14faf8792ebe, type: 2}
-  - {fileID: 2100000, guid: 906c82c5769910b4eb5aee908c459617, type: 2}
-  - {fileID: 2100000, guid: a57e458345b159d4bbdbb68b1d04bc48, type: 2}
-  - {fileID: 2100000, guid: d27bdae08e0e649469ece5822e57cbea, type: 2}
-  - {fileID: 2100000, guid: 2e400b5658df9dd4b9195216ac4f473c, type: 2}
-  - {fileID: 2100000, guid: d86eb995ed3c68a4e8425db194892d29, type: 2}
-  isRandomised: 1
 --- !u!1 &2033211708
 GameObject:
   m_ObjectHideFlags: 0
