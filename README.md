@@ -6,8 +6,31 @@ In this repository, there are two options for your project, the Media-Wall Sampl
 
 This document should be used as a guide on using the Media-Wall plugin for Unity, which can be downloaded as a Unity Package file from the repository releases page. To learn about Unity, please refer to the Unity Learn and Unity Documentation web pages for guidance.
 
-# Recommendations
+### Recommendations
 
 The Phoenix-Media-Wall package was built for Unity version 2022(LTS) and it is recommended that you use this version. All other Unity versions are untested and there may be unexpected errors with no documented solutions if you choose to use a different Unity build.
 
 The bodytracking in this sample expects the 3D model used to have a humanoid skeleton. https://www.mixamo.com/ is an excellent resource for downloading pre-rigged models for free, and it also has a tool for automated rigging.
+
+### Dependancies
+
+The Unity Project depends on the Native Websocket API package by Endal on GitHub, this package can be added to your project using the Unity Package Manager. Open the Package Manager window, Press the + in the upper left and click and from Git URL. The URL is: https://github.com/endel/NativeWebSocket.git#upm
+![alt text](https://github.com/twinplanets/Phoenix-Media-Wall-Sample/tree/main/Docs/packagemanagergit.png?raw=true)
+
+# Quick-Start Guide
+
+### Adding the Media Wall Package to your project
+
+### Opening the Media Wall Sample
+
+### Creating a bodytracking scene
+
+#### Debug Skeletons
+
+#### AvatarIK skeleton
+
+#### AvatarTransform Skeleton
+
+#### Webcam Passthrough
+
+### Building for web
