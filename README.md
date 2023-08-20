@@ -17,13 +17,15 @@ The bodytracking in this sample expects the 3D model used to have a humanoid ske
 The Unity Project depends on the Native Websocket API package by Endal on GitHub, this package can be added to your project using the Unity Package Manager. Open the Package Manager window, Press the + in the upper left and click and from Git URL. The URL is: https://github.com/endel/NativeWebSocket.git#upm
 ![Screenshot](Docs/packagemanagergit.png)
 
-# Quick-Start Guide
+# Installation
 
 ### Adding the Media Wall Package to your project
 
 ### Opening the Media Wall Sample
 
 ### Creating a bodytracking scene
+
+# Quick-Start Guide
 
 #### Debug Skeletons
 
