@@ -7,7 +7,7 @@
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width=1920 height=1080 tabindex="-1" style="width: 1920px; height: 1080px; background: #000000"></canvas>
-    <script src="Build/Avant-Now-Sample.loader.js"></script>
+    <script src="Build/Avant-Now.loader.js"></script>
     <script>
       // Mobile device style: fill the whole browser client area with the game canvas:
       var meta = document.createElement('meta');
@@ -23,9 +23,9 @@
       document.body.style.textAlign = "left";
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/Avant-Now-Sample.data.unityweb",
-        frameworkUrl: "Build/Avant-Now-Sample.framework.js.unityweb",
-        codeUrl: "Build/Avant-Now-Sample.wasm.unityweb",
+        dataUrl: "Build/Avant-Now.data.unityweb",
+        frameworkUrl: "Build/Avant-Now.framework.js.unityweb",
+        codeUrl: "Build/Avant-Now.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "TwinPlanets",
         productName: "Media Wall Sample",
