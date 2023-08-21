@@ -999,7 +999,7 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: 755feb909cb70974e9a09301c46e2cad, type: 3}
     - target: {fileID: 8229742409436579494, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
       propertyPath: m_LocalScale.x
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8561380973972670831, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
       propertyPath: m_Camera
