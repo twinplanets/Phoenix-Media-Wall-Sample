@@ -894,9 +894,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3382859525331961935, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4288999672877918741, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617194008798078382, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617194008798078382, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617194008798078382, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8229742409436579494, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
       propertyPath: m_LocalScale.x
