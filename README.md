@@ -34,14 +34,38 @@ Either use Git to clone the repository or download the source code from the Gith
 
 ### Creating a bodytracking scene
 
-![Screenshot](Docs/websocketclient.png)
+Once the package is installed, you need to create a scene to set-up the bodytacking. First create and open a new scene and create an empty object. Name this empty object 'Systems'. This object will be the parent for all the important systems required. The image below is an example of an organised Hierarchy for a media-wall project.
+
 ![Screenshot](Docs/hierarchy.png)
 
+Under the 'Systems' object (Name is unnecessary, call it what you want), create a new gameobject as a child. This should be named 'WebSocket Client', as once the WsClient script is added, this object will handle updating all the relevent scripts that require the bodytracking data.
+
+![Screenshot](Docs/websocketclient.png)
+
+The websocket client class has a list of 'Motion Objects', these are the different types of classes that use the motion data provided by the media-wall bodytracking data. In the image above, we can see the scene has two motion object renderers, one for the debug data and one to animate a character avatar. This is done to compare the data between the complex character and the raw data. More information on motion objects can be found below.
+
+There is also the option to add a text object, this simply reads out the data and applies it to a text element, and it can be left empty if undesired.
+
+Finally, there is the Sample Data Stream button. If checked, the Ws Client will instantiate a class that transmits sample data. This is to enable development remotely with no access to the live bodytracking. If the WsClient loads the sample data, the project has to reload to connect to the genuine connection.
+
 # Quick-Start Guide
+
+Once you have your scene set-up, you are free to use Unity to develop your scene. Make sure you develop everything to work with the WebGL player of Unity, as it has different requirements to standalone development. The Unity Documentation and Forums have extensive resources on what can and can't be done in WebGL. To access the bodytracking data, you have to create a gameobject with an instance of the Motion Object class, and include it in the WsClient's list of game objects.
+
+### Motion Object
+
+The Motion Object class reads the bodytracking data and instantiates a Skeleton for each collection of joints in the data. If multiple Motion Objects are referenced in the WsClient, the Skeletons will be duplicated for each system.
+
+The Motion Object class on its own is fairly useless, however several classes inherit from it and override some functions.
+
+By overriding the `protected virtual void UpdateMotionObject()` class. An example of this can be found in the DebugMotionObject class, which instantiates cubes and spheres at each joint position and updates every frame.
+
+Either use one of the following classes that overrides Motion Object, or create your own. It is not recommended to edit any of the scripts in this package, and if you need to do so, it is recommended to instead copy a script and rename it via file name and class definition. Then you can make any tweaks you like without damaging the code base.
 
 #### Debug Skeletons
 
 The debug motion object class in this package creates simple gameobjects to represent the bodytracking data. Once added to the Websocket Client Motion Objects array, the Debug Motion Object class will instantiate each skeleton in the bodytracking data. This is useful as a comparison tool to ensure that the bodytracking data is being accurately represented. (Tip: Rendering your character as 50% transparent in the material properties allows you to see the debug skeleton joints when they render inside the character body)
+
 ![Screenshot](Docs/debugmotionobject.png)
 
 #### AvatarIK skeleton
@@ -51,6 +75,29 @@ The debug motion object class in this package creates simple gameobjects to repr
 #### Webcam Passthrough
 
 To add the webcam footage to your scene, either as a fullscreen UI element or as a 3d object in the world space, either drag either the Canvas or Object prefabs from Assets/Prefabs/Webcam, or Create an object with either a renderer or a UI raw image and attach the Webcam Controller script.
+
 ![Screenshot](Docs/webcamprefab.png)
 
 ### Building for web
+
+First, open the build settings window and ensure that WebGL is the selected platform. Also, include the scene you want the WebGL player to open and add it to the list of Scenes to build. Once completed, select 'Player Settings...'.
+
+![Screenshot](Docs/buildsettings.png)
+
+Once in the player settings, there is a bunch of build settings. Check the Unity Docs for how to set up things like your own logo on the splash screen, or your company name in the metadata. However, the following is necessary;
+
+Under Icon, set the resolution to 1920x1080, Select run in background, and select the custom fullscreen template that is included in the project.
+
+![Screenshot](Docs/icon.png)
+
+Under Other settings, Reduce the stripping level, allow 'unsafe' code, and overall match the settings to the image below.
+
+![Screenshot](Docs/playerother.png)
+
+Finally, in publishing settings, set Enable Exceptions to Full without Stacktrace, the Compression format to Gzip, turn off Data caching, and enable the Decompression Fallback.
+
+![Screenshot](Docs/publish.png)
+
+If all is done correctly, 'build and run' will create a Html webpage that when hosted, will load your scene and play. On the media wall it will access the websocket and collect the motion data. It is recommended to leave sample data stream on so this can be tested on your own machine.
+
+Hint: The WebGL player will only work when hosted, so it shouldn't work by double click. Github Pages is a really simple way to host your webpage.
