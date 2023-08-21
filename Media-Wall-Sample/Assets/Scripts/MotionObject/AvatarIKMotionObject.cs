@@ -20,7 +20,7 @@ public class AvatarIKMotionObject : MotionObject
                 Skeletons[i].GetComponent<IKMotionSkeleton>().scaleFactor = scaleFactor;
             }
             Skeletons[i].GetComponent<IKMotionSkeleton>().UpdateSkeleton(_skeletons[i]);
-            Skeletons[i].transform.position = Vector3.Scale(_skeletons[i].joints[i], scaleFactor);
+            Skeletons[i].transform.position = Vector3.Scale(_skeletons[i].position, scaleFactor);
         }
     }
 }
@@ -91,39 +91,37 @@ public class IKMotionSkeleton : MonoBehaviour
     {
         if (_skeleton != null)
         {
-            //--------Calculate rotation by hips--------
-            Vector3 posA = _skeleton.joints[12];
-            Vector3 posB = _skeleton.joints[16];
+            Vector3 triangleNormal;
+            Transform currentBone;
+            Quaternion rotation;
 
-            //Direction and magnitude between point A and point B
-            Vector3 dir = posB - posA;
+            //----------Hips----------\\
+            currentBone = _animator.GetBoneTransform(HumanBodyBones.Hips);
+            if (currentBone != null)
+            {
+                // Calculate triangle normal
+                triangleNormal = CalculateTriangleNormal(_skeleton.joints[21], _skeleton.joints[17], _skeleton.joints[1]);
 
-            //Cross product of the direction and the up vector, normalised to remove magnitude
-            //Perp = Perpendicular Direction between A and B
-            Vector3 perp = Vector3.Cross(dir, Vector3.up).normalized;
+                // Calculate rotation to align with triangle normal (without Z-axis rotation)
+                rotation = Quaternion.LookRotation(triangleNormal, Vector3.up);
 
-            //Apply InverseKinematics to Avatar Bones
-            //Head position
-            _animator.SetLookAtWeight(1);
-            //_animator.SetLookAtPosition(Vector3.Scale(Vector3.MoveTowards(_skeleton.joints[28], _skeleton.joints[30], 0.5f), scaleFactor));
-            _animator.SetLookAtPosition(perp);
+                // Calculate the direction of the upper leg bones
+                Vector3 backDirection = (_skeleton.joints[1] - _skeleton.joints[0]).normalized;
 
-            ////Right Hand
-            //_animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-            //_animator.SetIKPosition(AvatarIKGoal.RightHand, (Vector3.Scale(_skeleton.joints[7] - _skeleton.joints[0], scaleFactor)));
+                // Calculate the Z rotation angle based on the upper leg direction
+                float zRotationOffset = Mathf.Atan2(backDirection.y, backDirection.x) * Mathf.Rad2Deg;
 
-            ////Right Foot
-            //_animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
-            //_animator.SetIKPosition(AvatarIKGoal.RightFoot, (Vector3.Scale(_skeleton.joints[19] - _skeleton.joints[0], scaleFactor)));
+                // Apply the Z rotation to the rotation
+                Quaternion zRotation = Quaternion.Euler(0, 0, zRotationOffset - 90f);
+                //Quaternion finalRotation = rotation;
+                Quaternion finalRotation = rotation * zRotation;
 
-            ////Left Hand
-            //_animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
-            //_animator.SetIKPosition(AvatarIKGoal.LeftHand, (Vector3.Scale(_skeleton.joints[14] - _skeleton.joints[0], scaleFactor)));
+                _animator.bodyRotation = finalRotation;
+            }
 
-            ////Left Foot
-            //_animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
-            //_animator.SetIKPosition(AvatarIKGoal.LeftFoot, (Vector3.Scale(_skeleton.joints[23] - _skeleton.joints[0], scaleFactor)));
-
+            //----------Head----------\\
+            triangleNormal = CalculateTriangleNormal(_skeleton.joints[28], _skeleton.joints[30], _skeleton.joints[27]);
+            _animator.SetBoneLocalRotation(HumanBodyBones.Head, Quaternion.LookRotation(triangleNormal, Vector3.up));
 
             //Right Hand
             _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
@@ -141,11 +139,16 @@ public class IKMotionSkeleton : MonoBehaviour
             _animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
             _animator.SetIKPosition(AvatarIKGoal.LeftFoot, (Vector3.Scale(_skeleton.joints[23], scaleFactor)));
 
-            //Set the origin position
-            //_animator.rootRotation = quatAngles;
-            //_animator.rootPosition = Vector3.Scale(_skeleton.joints[0], scaleFactor);
-            //_animator.GetBoneTransform(HumanBodyBones.Hips).localPosition = Vector3.Scale(_skeleton.joints[0], scaleFactor);
-            _animator.SetBoneLocalRotation(HumanBodyBones.Hips, quatAngles);
         }
+    }
+
+    private Vector3 CalculateTriangleNormal(Vector3 vertexA, Vector3 vertexB, Vector3 vertexC)
+    {
+        Vector3 AB = vertexB - vertexA;
+        Vector3 AC = vertexC - vertexA;
+
+        Vector3 normal = Vector3.Cross(AB, AC).normalized;
+
+        return normal;
     }
 }

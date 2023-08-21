@@ -20,7 +20,7 @@ public class AvatarTransformMotionObject : MotionObject
                 Skeletons[i].GetComponent<AvatarTransformMotionSkeleton>().scaleFactor = scaleFactor;
             }
             Skeletons[i].GetComponent<AvatarTransformMotionSkeleton>().UpdateSkeleton(_skeletons[i]);
-            Skeletons[i].transform.position = Vector3.Scale(_skeletons[i].joints[i], scaleFactor);
+            Skeletons[i].transform.position = Vector3.Scale(_skeletons[i].position, scaleFactor);
         }
     }
 }

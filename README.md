@@ -58,7 +58,7 @@ The Motion Object class reads the bodytracking data and instantiates a Skeleton 
 
 The Motion Object class on its own is fairly useless, however several classes inherit from it and override some functions.
 
-By overriding the `protected virtual void UpdateMotionObject()` class. An example of this can be found in the DebugMotionObject class, which instantiates cubes and spheres at each joint position and updates every frame.
+By overriding the `protected virtual void UpdateMotionObject()` , functionality can be added to the motion object. An example of this can be found in the DebugMotionObject class, which instantiates cubes and spheres at each joint position and updates every frame.
 
 Either use one of the following classes that overrides Motion Object, or create your own. It is not recommended to edit any of the scripts in this package, and if you need to do so, it is recommended to instead copy a script and rename it via file name and class definition. Then you can make any tweaks you like without damaging the code base.
 
@@ -70,11 +70,17 @@ The debug motion object class in this package creates simple gameobjects to repr
 
 #### AvatarIK skeleton
 
-#### AvatarTransform Skeleton
+The AvatarIK Motion Object takes a Humanoid Character, an example from Mixamo is already included in the project. The character has a humanoid avatar that the Avatar IK script manipulates. First import your character, select the character, in the inspector select Rig, then set the animation type to Humanoid and the definition either create from this model, or copy from another avatar (Use the Avatar that comes with the included mannequin).
+
+![Screenshot](Docs/avatar.png)
+
+In the samples folder, the Avant-Now examples uses a background image and a custom script, the Rainbow AvatarIK Skeleton. This script applies a random material to each skeleton, changing the colours.
 
 #### Webcam Passthrough
 
 To add the webcam footage to your scene, either as a fullscreen UI element or as a 3d object in the world space, either drag either the Canvas or Object prefabs from Assets/Prefabs/Webcam, or Create an object with either a renderer or a UI raw image and attach the Webcam Controller script.
+
+Setting the X Scale to -1 flips the image horizontally.
 
 ![Screenshot](Docs/webcamprefab.png)
 

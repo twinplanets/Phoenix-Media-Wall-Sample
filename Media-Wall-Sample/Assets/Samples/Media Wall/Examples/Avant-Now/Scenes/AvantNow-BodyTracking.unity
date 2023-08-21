@@ -188,6 +188,7 @@ Transform:
   - {fileID: 700099416}
   - {fileID: 2016035378}
   - {fileID: 337377174}
+  - {fileID: 1189783144}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &337377173
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f967826ec9124446b48b46b0c5e0472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleFactor: {x: 0, y: 0, z: 0}
+  scaleFactor: {x: 0.02, y: 0.01, z: 0.01}
   _skeletons: []
   Skeletons: []
   maxSkeletons: 5
@@ -284,7 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   motionObjects:
   - {fileID: 2016035379}
-  - {fileID: 337377175}
   textfield: {fileID: 0}
   SampleDataStream: 1
 --- !u!1 &705507993
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 1189783146}
   - component: {fileID: 1189783145}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Default Mat Loader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -568,12 +568,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1189783143}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1951362510}
+  m_Father: {fileID: 141074845}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1189783145
 SphereCollider:
@@ -745,7 +745,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 135732546}
-  - {fileID: 1189783144}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2016035377
@@ -759,7 +758,7 @@ GameObject:
   - component: {fileID: 2016035378}
   - component: {fileID: 2016035379}
   m_Layer: 0
-  m_Name: Avatar Transform Motion Manager
+  m_Name: Avatar IK Motion Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -789,14 +788,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2016035377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28af6559f7122b348bb85aa7d2c8fa5d, type: 3}
+  m_Script: {fileID: 11500000, guid: c553598365eea9146a4a045801effba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleFactor: {x: 0, y: 0, z: 0}
+  scaleFactor: {x: 0.02, y: 0.01, z: 0.01}
   _skeletons: []
   Skeletons: []
   maxSkeletons: 5
   HumanoidAvatarPrefab: {fileID: 1750171076509550606, guid: ddde999c8e77ac748bd7e9c691d3fed9, type: 3}
+  Materials:
+  - {fileID: 2100000, guid: 16afddd78b5e3614a98e91a695de8e76, type: 2}
+  - {fileID: 2100000, guid: b05b83dbf989e774490f14faf8792ebe, type: 2}
+  - {fileID: 2100000, guid: 906c82c5769910b4eb5aee908c459617, type: 2}
+  - {fileID: 2100000, guid: a57e458345b159d4bbdbb68b1d04bc48, type: 2}
+  - {fileID: 2100000, guid: d27bdae08e0e649469ece5822e57cbea, type: 2}
+  - {fileID: 2100000, guid: 2e400b5658df9dd4b9195216ac4f473c, type: 2}
+  - {fileID: 2100000, guid: aaa7d14f8fa441d46896f85c97c02d1f, type: 2}
+  - {fileID: 2100000, guid: d86eb995ed3c68a4e8425db194892d29, type: 2}
+  isRandomised: 1
 --- !u!1001 &1177929692962547346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -888,6 +897,10 @@ PrefabInstance:
     - target: {fileID: 4288999672877918741, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229742409436579494, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8561380973972670831, guid: 1a005a480f6073943b62419bb0b56ed1, type: 3}
       propertyPath: m_Camera
