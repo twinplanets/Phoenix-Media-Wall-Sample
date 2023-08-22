@@ -123,7 +123,14 @@ public class IKMotionSkeleton : MonoBehaviour
 
             //----------Head----------\\
             triangleNormal = CalculateTriangleNormal(_skeleton.joints[28], _skeleton.joints[30], _skeleton.joints[27]);
-            _animator.SetBoneLocalRotation(HumanBodyBones.Head, Quaternion.LookRotation(triangleNormal, Vector3.up));
+            //_animator.SetBoneLocalRotation(HumanBodyBones.Head, Quaternion.LookRotation(triangleNormal, Vector3.up));
+
+            // Calculate the rotation of the head bone in world space, considering the hip rotation
+            Quaternion hipRotation = _animator.GetBoneTransform(HumanBodyBones.Hips).rotation;
+            Quaternion headWorldRotation = hipRotation * Quaternion.LookRotation(triangleNormal, Vector3.up);
+
+            // Set the calculated rotation to the head bone in local space
+            _animator.SetBoneLocalRotation(HumanBodyBones.Head, Quaternion.Inverse(hipRotation) * headWorldRotation);
 
             //Right Hand
             _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
