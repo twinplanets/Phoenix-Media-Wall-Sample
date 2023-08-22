@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1473333357516006195, guid: 76ab5fc872dc784439eea1705e6feb87, type: 3}
+      propertyPath: HumanoidAvatarPrefab
+      value: 
+      objectReference: {fileID: 1750171076509550606, guid: ddde999c8e77ac748bd7e9c691d3fed9, type: 3}
     - target: {fileID: 1642822185005154175, guid: 76ab5fc872dc784439eea1705e6feb87, type: 3}
       propertyPath: m_Name
       value: ==== SYSTEMS ====
@@ -300,6 +304,14 @@ PrefabInstance:
     - target: {fileID: 1408674581348935276, guid: 482e47f25362a0748b95c1761bd7d2cd, type: 3}
       propertyPath: m_Name
       value: ==== RENDERING ====
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783755154325535939, guid: 482e47f25362a0748b95c1761bd7d2cd, type: 3}
+      propertyPath: m_Color.b
+      value: 0.56037736
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783755154325535939, guid: 482e47f25362a0748b95c1761bd7d2cd, type: 3}
+      propertyPath: m_Color.g
+      value: 0.56037736
       objectReference: {fileID: 0}
     - target: {fileID: 8349596682022493945, guid: 482e47f25362a0748b95c1761bd7d2cd, type: 3}
       propertyPath: m_LocalPosition.x
