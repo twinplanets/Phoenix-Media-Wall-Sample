@@ -11,51 +11,56 @@ public class WebcamController : MonoBehaviour
     IEnumerator Start()
     {
         yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
-        Debug.Log("Authorisation Requested");
+        while (Application.HasUserAuthorization(UserAuthorization.WebCam) == false)
+        {
+            yield return new WaitForSeconds(0.25f);
+            yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
+            Debug.Log("Authorisation Requested");
+        }
+
         Debug.Log(Application.HasUserAuthorization(UserAuthorization.WebCam));
-        //if (Application.HasUserAuthorization(UserAuthorization.WebCam))
-        //{
-
-        // Check for Renderer
-        rendererComponent = GetComponent<Renderer>();
-        // Check for CanvasRenderer
-        rawImageComponent = GetComponent<RawImage>();
-
-        webcamTexture = new WebCamTexture();
-
-        WebCamDevice[] devices = WebCamTexture.devices;
-        for (int i = 0; i < devices.Length; i++)
+        if (Application.HasUserAuthorization(UserAuthorization.WebCam))
         {
-            Debug.Log(devices[i].name);
-        }
+            // Check for Renderer
+            rendererComponent = GetComponent<Renderer>();
+            // Check for CanvasRenderer
+            rawImageComponent = GetComponent<RawImage>();
 
-        // Perform swapping based on the availability of components
-        if (rendererComponent != null)
-        {
-            // Check if webcam is available
-            if (WebCamTexture.devices.Length > 0)
+            webcamTexture = new WebCamTexture();
+
+            WebCamDevice[] devices = WebCamTexture.devices;
+            for (int i = 0; i < devices.Length; i++)
             {
-                rendererComponent.material.mainTexture = webcamTexture;
-                webcamTexture.Play();
-            }
-            else
-            {
-                Debug.LogError("No webcam devices found.");
+                Debug.Log(devices[i].name);
             }
 
-        }
-        else if (rawImageComponent != null)
-        {
-            if (WebCamTexture.devices.Length > 0) {
-                rawImageComponent.texture = webcamTexture;
-                webcamTexture.Play();
-            }
-            else
+            // Perform swapping based on the availability of components
+            if (rendererComponent != null)
             {
-                Debug.LogError("No webcam devices found.");
+                // Check if webcam is available
+                if (WebCamTexture.devices.Length > 0)
+                {
+                    rendererComponent.material.mainTexture = webcamTexture;
+                    webcamTexture.Play();
+                }
+                else
+                {
+                    Debug.LogError("No webcam devices found.");
+                }
+
+            }
+            else if (rawImageComponent != null)
+            {
+                if (WebCamTexture.devices.Length > 0) {
+                    rawImageComponent.texture = webcamTexture;
+                    webcamTexture.Play();
+                }
+                else
+                {
+                    Debug.LogError("No webcam devices found.");
+                }
             }
         }
-        //}
     }
 
 }
