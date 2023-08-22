@@ -11,8 +11,10 @@ public class WebcamController : MonoBehaviour
     IEnumerator Start()
     {
     yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
+        Debug.Log("Authorisation Requested");
         if (Application.HasUserAuthorization(UserAuthorization.WebCam))
         {
+            Debug.Log(Application.HasUserAuthorization(UserAuthorization.WebCam));
             // Check for Renderer
             rendererComponent = GetComponent<Renderer>();
             // Check for CanvasRenderer
