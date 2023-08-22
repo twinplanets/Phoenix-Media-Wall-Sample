@@ -16,10 +16,11 @@ public class RainbowAvatarIKMotionObject : MotionObject
         {
             if (Skeletons[i] == null)
             {
-                Skeletons[i] = Instantiate<GameObject>(HumanoidAvatarPrefab);
+                Skeletons[i] = Instantiate<GameObject>(HumanoidAvatarPrefab, this.transform);
                 Skeletons[i].AddComponent<IKMotionSkeleton>();
                 Skeletons[i].GetComponent<IKMotionSkeleton>().InstantiateSkeleton(_skeletons[i]);
                 Skeletons[i].GetComponent<IKMotionSkeleton>().scaleFactor = scaleFactor;
+                Skeletons[i].transform.position = Vector3.Scale(_skeletons[i].position, scaleFactor);
                 if (Materials != null)
                 {
                     if(isRandomised)

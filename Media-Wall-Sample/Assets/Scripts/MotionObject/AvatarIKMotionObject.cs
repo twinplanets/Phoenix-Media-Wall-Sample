@@ -14,7 +14,7 @@ public class AvatarIKMotionObject : MotionObject
         {
             if (Skeletons[i] == null)
             {
-                Skeletons[i] = Instantiate<GameObject>(HumanoidAvatarPrefab);
+                Skeletons[i] = Instantiate<GameObject>(HumanoidAvatarPrefab, transform);
                 Skeletons[i].AddComponent<IKMotionSkeleton>();
                 Skeletons[i].GetComponent<IKMotionSkeleton>().InstantiateSkeleton(_skeletons[i]);
                 Skeletons[i].GetComponent<IKMotionSkeleton>().scaleFactor = scaleFactor;
@@ -41,12 +41,14 @@ public class IKMotionSkeleton : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void InstantiateSkeleton(Skeleton skeleton) { _skeleton = skeleton; }
+    public void InstantiateSkeleton(Skeleton skeleton)
+    {
+        _skeleton = skeleton;
+    }
 
     public void UpdateSkeleton(Skeleton skeleton)
     {
         _skeleton = skeleton;
-
         //Uses the forward vector between two bones to get a rotation value
         #region Rotation Calculation
 

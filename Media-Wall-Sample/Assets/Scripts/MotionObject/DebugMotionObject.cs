@@ -31,6 +31,7 @@ public class DebugMotionObject : MotionObject
             if (Skeletons[i] == null)
             {
                 Skeletons[i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Skeletons[i].transform.SetParent(transform);
                 Skeletons[i].AddComponent<SkeletonDebug>();
                 Skeletons[i].GetComponent<SkeletonDebug>().InstantiateSkeleton(_skeletons[i]);
             }

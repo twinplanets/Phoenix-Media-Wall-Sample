@@ -48,6 +48,10 @@ There is also the option to add a text object, this simply reads out the data an
 
 Finally, there is the Sample Data Stream button. If checked, the Ws Client will instantiate a class that transmits sample data. This is to enable development remotely with no access to the live bodytracking. If the WsClient loads the sample data, the project has to reload to connect to the genuine connection.
 
+#### Scene Tip
+
+In the prefab folder, there is a folder containing everything needed named Scene. In this folder you can find everything needed for bodytracking already set-up. For instance, you can see the rotation of the ground plane and camera in the Rendering and Level prefab. This is to compensate for the angle that the Zed2 camera is placed at.
+
 # Quick-Start Guide
 
 Once you have your scene set-up, you are free to use Unity to develop your scene. Make sure you develop everything to work with the WebGL player of Unity, as it has different requirements to standalone development. The Unity Documentation and Forums have extensive resources on what can and can't be done in WebGL. To access the bodytracking data, you have to create a gameobject with an instance of the Motion Object class, and include it in the WsClient's list of game objects.

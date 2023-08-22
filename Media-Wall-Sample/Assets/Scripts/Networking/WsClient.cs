@@ -60,18 +60,6 @@ public class WsClient : MonoBehaviour
         if(textfield != null) textfield.text = wsLastMessage;
     }
 
-    async void SendWebSocketMessage()
-    {
-        if (websocket.State == WebSocketState.Open)
-        {
-            // Sending bytes
-            await websocket.Send(new byte[] { 10, 20, 30 });
-
-            // Sending plain text
-            await websocket.SendText("plain text message");
-        }
-    }
-
     public void SendSampleData(string data)
     {
         wsLastMessage = data;
