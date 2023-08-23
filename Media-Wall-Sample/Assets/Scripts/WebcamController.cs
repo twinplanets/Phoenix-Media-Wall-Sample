@@ -39,7 +39,7 @@ public class WebcamController : MonoBehaviour
                 Debug.Log(devices[i].name);
             }
 
-            webcamTexture = new WebCamTexture(devices[2].name);
+            webcamTexture = new WebCamTexture(devices[deviceIndex].name);
 
             // Perform swapping based on the availability of components
             if (rendererComponent != null)

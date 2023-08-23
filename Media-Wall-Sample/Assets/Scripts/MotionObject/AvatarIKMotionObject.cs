@@ -127,24 +127,26 @@ public class IKMotionSkeleton : MonoBehaviour
 
             // Calculate the rotation of the head bone in world space, considering the hip rotation
             Quaternion hipRotation = _animator.GetBoneTransform(HumanBodyBones.Hips).rotation;
-            Quaternion headWorldRotation = hipRotation * Quaternion.LookRotation(triangleNormal, Vector3.up);
 
-            // Set the calculated rotation to the head bone in local space
-            _animator.SetBoneLocalRotation(HumanBodyBones.Head, Quaternion.Inverse(hipRotation) * headWorldRotation);
+            // Convert triangleNormal to head bone's local space
+            Quaternion localTriangleNormal = Quaternion.Inverse(hipRotation) * Quaternion.LookRotation(triangleNormal, Vector3.up);
 
-            //Right Hand
+            // Set the local rotation of the head bone
+            _animator.SetBoneLocalRotation(HumanBodyBones.Head, localTriangleNormal);
+
+            //----------Right Hand----------\\
             _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
             _animator.SetIKPosition(AvatarIKGoal.RightHand, (Vector3.Scale(_skeleton.joints[7], scaleFactor)));
 
-            //Right Foot
+            //----------Right Foot----------\\
             _animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
             _animator.SetIKPosition(AvatarIKGoal.RightFoot, (Vector3.Scale(_skeleton.joints[19], scaleFactor)));
 
-            //Left Hand
+            //----------Left Hand----------\\
             _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
             _animator.SetIKPosition(AvatarIKGoal.LeftHand, (Vector3.Scale(_skeleton.joints[14], scaleFactor)));
 
-            //Left Foot
+            //----------Left Foot----------\\
             _animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
             _animator.SetIKPosition(AvatarIKGoal.LeftFoot, (Vector3.Scale(_skeleton.joints[23], scaleFactor)));
 
