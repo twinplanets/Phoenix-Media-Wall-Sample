@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3318879706571844622, guid: 76ab5fc872dc784439eea1705e6feb87, type: 3}
       propertyPath: deviceIndex
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3318879706571844622, guid: 76ab5fc872dc784439eea1705e6feb87, type: 3}
       propertyPath: rawImageComponents.Array.data[0]
