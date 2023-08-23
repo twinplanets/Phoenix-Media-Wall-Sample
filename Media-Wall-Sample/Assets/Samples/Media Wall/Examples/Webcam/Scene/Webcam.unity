@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d500e83f73ae36840aa7eb0a946adfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deviceIndex: 3
+  deviceIndex: 2
   requireDeviceAuthorisation: 0
   rendererComponents:
   - {fileID: 538200254}
