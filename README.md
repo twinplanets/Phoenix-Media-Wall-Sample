@@ -82,7 +82,7 @@ In the samples folder, the Avant-Now examples uses a background image and a cust
 
 #### Webcam Passthrough
 
-To add the webcam footage to your scene, either as a fullscreen UI element or as a 3d object in the world space, either drag either the Canvas or Object prefabs from Assets/Prefabs/Webcam, or Create an object with either a renderer or a UI raw image and attach the Webcam Controller script.
+To add the webcam footage to your scene, either as a fullscreen UI element or as a 3d object in the world space, add the Webcam Manager script to an empty gameobject, then drag in each Renderer (3D Objects) and each Raw Image (UI) into the arrays in the Webcam Manager Inspector fields. To access the webcam, use device index 3. To access the alternate machine that is captured through a capture card, use device 2.
 
 Setting the X Scale to -1 flips the image horizontally.
 
