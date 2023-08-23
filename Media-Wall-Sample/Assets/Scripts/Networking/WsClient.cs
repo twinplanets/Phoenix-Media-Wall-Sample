@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 using NativeWebSocket;
 
-public class WsClient : MonoBehaviour
+public class WsClient : MonoBehaviourSingleton<WsClient>
 {
     WebSocket websocket;
     public MotionObject[] motionObjects;
