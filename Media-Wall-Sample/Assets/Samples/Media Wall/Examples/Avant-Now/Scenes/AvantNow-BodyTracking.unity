@@ -167,8 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d500e83f73ae36840aa7eb0a946adfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deviceIndex: 3
+  deviceIndex: 1
   requireDeviceAuthorisation: 0
+  rendererComponents: []
+  rawImageComponents: []
 --- !u!1 &135732545
 GameObject:
   m_ObjectHideFlags: 0
