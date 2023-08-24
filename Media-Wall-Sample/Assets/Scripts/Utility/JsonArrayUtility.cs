@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TwinPlanets
+namespace TwinPlanets.Utility
 {
     /// <summary>
     /// Helper script for serializing and de-serializing Json Arrays

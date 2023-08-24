@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace TwinPlanets
+namespace TwinPlanets.Utility
 {
     //Generic Singleton classes for Unity. Use MonoBehaviourSingletonPersistent for any singleton that must survive a level load. 
     public class MonoBehaviourSingleton<T> : MonoBehaviour

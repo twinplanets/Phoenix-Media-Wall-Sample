@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TwinPlanets
+namespace TwinPlanets.Utility
 {
     public class WebcamManager : MonoBehaviourSingleton<WebcamManager>
     {

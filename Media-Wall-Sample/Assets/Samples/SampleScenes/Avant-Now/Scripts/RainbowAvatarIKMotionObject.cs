@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RainbowAvatarIKMotionObject : TwinPlanets.MotionObject
+public class RainbowAvatarIKMotionObject : TwinPlanets.PhoenixMediaWall.MotionObject
 {
     public GameObject HumanoidAvatarPrefab;
     public Material[] Materials;
@@ -17,9 +17,9 @@ public class RainbowAvatarIKMotionObject : TwinPlanets.MotionObject
             if (Skeletons[i] == null)
             {
                 Skeletons[i] = Instantiate<GameObject>(HumanoidAvatarPrefab, this.transform);
-                Skeletons[i].AddComponent<TwinPlanets.IKMotionSkeleton>();
-                Skeletons[i].GetComponent<TwinPlanets.IKMotionSkeleton>().InstantiateSkeleton(_skeletons[i]);
-                Skeletons[i].GetComponent<TwinPlanets.IKMotionSkeleton>().scaleFactor = scaleFactor;
+                Skeletons[i].AddComponent<TwinPlanets.PhoenixMediaWall.IKMotionSkeleton>();
+                Skeletons[i].GetComponent<TwinPlanets.PhoenixMediaWall.IKMotionSkeleton>().InstantiateSkeleton(_skeletons[i]);
+                Skeletons[i].GetComponent<TwinPlanets.PhoenixMediaWall.IKMotionSkeleton>().scaleFactor = scaleFactor;
                 Skeletons[i].transform.position = Vector3.Scale(_skeletons[i].position, scaleFactor);
                 if (Materials != null)
                 {
@@ -42,7 +42,7 @@ public class RainbowAvatarIKMotionObject : TwinPlanets.MotionObject
                     }
                 }
             }
-            Skeletons[i].GetComponent<TwinPlanets.IKMotionSkeleton>().UpdateSkeleton(_skeletons[i]);
+            Skeletons[i].GetComponent<TwinPlanets.PhoenixMediaWall.IKMotionSkeleton>().UpdateSkeleton(_skeletons[i]);
             Skeletons[i].transform.position = Vector3.Scale(_skeletons[i].joints[i], scaleFactor);
         }
     }

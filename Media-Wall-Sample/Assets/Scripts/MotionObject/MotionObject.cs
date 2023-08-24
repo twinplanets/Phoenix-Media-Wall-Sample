@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TwinPlanets
+namespace TwinPlanets.PhoenixMediaWall
 {
     public static class SkeletonConversion
     {
@@ -83,8 +83,8 @@ namespace TwinPlanets
         //Json Parser that saves streamed in data from the WsClient and saves it as an Object
         public void UpdateData(byte[] bytes)
         {
-            string wrappedArray = JsonArrayUtility.EncapsulateInWrapper(System.Text.Encoding.UTF8.GetString(bytes));
-            _skeletons = JsonArrayUtility.FromJson<Skeleton>(wrappedArray);
+            string wrappedArray = Utility.JsonArrayUtility.EncapsulateInWrapper(System.Text.Encoding.UTF8.GetString(bytes));
+            _skeletons = Utility.JsonArrayUtility.FromJson<Skeleton>(wrappedArray);
         }
     
     }

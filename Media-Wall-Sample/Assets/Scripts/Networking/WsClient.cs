@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 using NativeWebSocket;
 
-namespace TwinPlanets
+namespace TwinPlanets.PhoenixMediaWall
 {
-    public class WsClient : MonoBehaviourSingleton<WsClient>
+    public class WsClient : Utility.MonoBehaviourSingleton<WsClient>
     {
         WebSocket websocket;
         public MotionObject[] motionObjects;

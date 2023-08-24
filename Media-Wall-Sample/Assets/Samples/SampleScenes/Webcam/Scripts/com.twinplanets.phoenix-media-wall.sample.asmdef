@@ -1,0 +1,16 @@
+{
+    "name": "com.twinplanets.phoenix-media-wall.sample",
+    "rootNamespace": "",
+    "references": [
+        "com.twinplanets.phoenix-media-wall"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
