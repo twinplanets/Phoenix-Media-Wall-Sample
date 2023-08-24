@@ -62,6 +62,7 @@ public class WsClient : MonoBehaviourSingleton<WsClient>
 
     public void SendSampleData(string data)
     {
+        wsLastMessage = data;
         foreach (var item in motionObjects)
         {
             item.UpdateData(System.Text.Encoding.UTF8.GetBytes(data));

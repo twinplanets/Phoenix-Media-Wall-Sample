@@ -39,6 +39,7 @@ public class MotionObject : MonoBehaviour
         //Check if Skeleton data has been received
         if (_skeletons.Length != 0)
         {
+            Debug.Log("Skeletons Detected. Quantity: " + _skeletons.Length);
             //Checks the size of _skeletons against Skeletons to ensure the arrays match in number of captured skeletons
             #region ArrayResizing
 
