@@ -82,7 +82,18 @@ In the samples folder, the Avant-Now examples uses a background image and a cust
 
 #### Webcam Passthrough
 
-To add the webcam footage to your scene, either as a fullscreen UI element or as a 3d object in the world space, add the Webcam Manager script to an empty gameobject, then drag in each Renderer (3D Objects) and each Raw Image (UI) into the arrays in the Webcam Manager Inspector fields. To access the webcam, use device index 3. To access the alternate machine that is captured through a capture card, use device 2.
+To add the webcam footage to your scene, either as a fullscreen UI element or as a 3d object in the world space, add the Webcam Manager script to an empty gameobject, then drag in each Renderer (3D Objects) and each Raw Image (UI) into the arrays in the Webcam Manager Inspector fields. Enable the cycle camera options and adjust the delay to cycle through all the cameras available on the device. This is for debugging and finding out what index you should use to test at home.
+
+## The device index value represents the webcam device to access. The media wall has multiple, and the index values refer to;
+
+- Anker PowerConf C300
+- ZED 2
+- Blackmagic WDM Capture
+- Decklink Video Captures
+
+To get the webcam to work on the Media Wall, the 'Require User Authentication' box needs to be unticked. However, you may find that to access the webcam on your device, it needs to be checked.
+
+The debug device text field sets the text value of a text box to the name of the currently selected device. Useful for debugging.
 
 Setting the X Scale to -1 flips the image horizontally.
 

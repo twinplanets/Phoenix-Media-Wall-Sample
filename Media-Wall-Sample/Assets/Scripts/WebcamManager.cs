@@ -4,13 +4,26 @@ using UnityEngine.UI;
 
 public class WebcamManager : MonoBehaviourSingleton<WebcamManager>
 {
-    public int deviceIndex = 3;
+    public ushort deviceIndex
+    {
+        get {return _deviceIndex; }
+        set { _deviceIndex = value;
+            StartWebcam(); }
+    }
+    [SerializeField] private ushort _deviceIndex = 1;
+    WebCamDevice[] devices;
+
     public bool requireDeviceAuthorisation = false;
     private bool hasUserAuthorization = false;
+
+    public bool cycleCameras = false;
+    public float cycleDelay = 15f;
 
     private WebCamTexture webcamTexture;
     public Renderer[] rendererComponents;
     public RawImage[] rawImageComponents;
+
+    public Text debugDeviceText;
 
     IEnumerator Start()
     {
@@ -28,13 +41,40 @@ public class WebcamManager : MonoBehaviourSingleton<WebcamManager>
         }
 
         //List all devices
-        WebCamDevice[] devices = WebCamTexture.devices;
+        devices = WebCamTexture.devices;
         for (int i = 0; i < devices.Length; i++)
         {
             Debug.Log(devices[i].name);
         }
 
-        webcamTexture = new WebCamTexture(devices[deviceIndex].name);
+        if (devices.Length > 0)
+        {
+            if(cycleCameras)
+            {
+                StartWebcam();
+                StartCoroutine(CycleCamerasCoroutine());
+            }
+            else
+            {
+                StartWebcam();
+            }
+        }
+        else
+        {
+            Debug.LogError("No webcam devices found.");
+        }
+    }
+
+    private void StartWebcam()
+    {
+        if (webcamTexture != null)
+        {
+            webcamTexture.Stop();
+        }
+
+        Debug.Log("Starting webcam device: " + devices[GetDeviceIndex()]);
+
+        webcamTexture = new WebCamTexture(devices[GetDeviceIndex()].name);
 
         foreach (var item in rendererComponents)
         {
@@ -46,6 +86,27 @@ public class WebcamManager : MonoBehaviourSingleton<WebcamManager>
             item.texture = webcamTexture;
         }
 
+        if(debugDeviceText != null)
+        {
+            debugDeviceText.text = webcamTexture.deviceName;
+        }
+
         webcamTexture.Play();
+    }
+
+    public ushort GetDeviceIndex()
+    {
+        return (ushort)(_deviceIndex % devices.Length);
+    }
+
+    private IEnumerator CycleCamerasCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(cycleDelay); // Wait for 30 seconds
+
+            _deviceIndex++;
+            StartWebcam();
+        }
     }
 }

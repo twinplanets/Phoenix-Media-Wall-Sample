@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &126804475
 Transform:
   m_ObjectHideFlags: 0
@@ -167,10 +167,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d500e83f73ae36840aa7eb0a946adfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deviceIndex: 1
+  _deviceIndex: 1
   requireDeviceAuthorisation: 0
+  cycleCameras: 0
+  cycleDelay: 15
   rendererComponents: []
   rawImageComponents: []
+  debugDeviceText: {fileID: 0}
 --- !u!1 &135732545
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +290,7 @@ MonoBehaviour:
   scaleFactor: {x: 0.02, y: 0.01, z: 0.01}
   _skeletons: []
   Skeletons: []
-  maxSkeletons: 5
+  maxSkeletons: 20
 --- !u!1 &700099415
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,7 +912,7 @@ GameObject:
   - component: {fileID: 2016035378}
   - component: {fileID: 2016035379}
   m_Layer: 0
-  m_Name: Avatar IK Motion Manager
+  m_Name: Rainbow Avatar IK Motion Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -945,9 +948,11 @@ MonoBehaviour:
   scaleFactor: {x: 0.02, y: 0.01, z: 0.01}
   _skeletons: []
   Skeletons: []
-  maxSkeletons: 5
+  maxSkeletons: 20
   HumanoidAvatarPrefab: {fileID: 1750171076509550606, guid: ddde999c8e77ac748bd7e9c691d3fed9, type: 3}
   Materials:
+  - {fileID: 2100000, guid: 9dc66623ff542d744b9f9354224dd34f, type: 2}
+  - {fileID: 2100000, guid: c45bd7842663c1f4daef69ea97a00a23, type: 2}
   - {fileID: 2100000, guid: 16afddd78b5e3614a98e91a695de8e76, type: 2}
   - {fileID: 2100000, guid: b05b83dbf989e774490f14faf8792ebe, type: 2}
   - {fileID: 2100000, guid: 906c82c5769910b4eb5aee908c459617, type: 2}
