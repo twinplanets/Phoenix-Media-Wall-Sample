@@ -7,120 +7,123 @@ using UnityEngine.UI;
 
 using NativeWebSocket;
 
-public class WsClient : MonoBehaviourSingleton<WsClient>
+namespace TwinPlanets
 {
-    WebSocket websocket;
-    public MotionObject[] motionObjects;
-    [SerializeField] Text textfield;
-    [SerializeField] bool SampleDataStream;
-    string wsLastMessage = "No Message";
-    WsSampleTransmitter wsST;
-
-    // Start is called before the first frame update
-    async void Start()
+    public class WsClient : MonoBehaviourSingleton<WsClient>
     {
-        websocket = new WebSocket("ws://localhost:8080");
+        WebSocket websocket;
+        public MotionObject[] motionObjects;
+        [SerializeField] Text textfield;
+        [SerializeField] bool SampleDataStream;
+        string wsLastMessage = "No Message";
+        WsSampleTransmitter wsST;
 
-        websocket.OnOpen += () =>
+        // Start is called before the first frame update
+        async void Start()
         {
-            Debug.Log("Connection open!");
-        };
+            websocket = new WebSocket("ws://localhost:8080");
 
-        websocket.OnError += (e) =>
-        {
-            Debug.Log("Error! " + e);
-            if (SampleDataStream)
+            websocket.OnOpen += () =>
             {
-                wsST = gameObject.AddComponent<WsSampleTransmitter>();
-            }
-        };
+                Debug.Log("Connection open!");
+            };
 
-        websocket.OnClose += (e) =>
-        {
-            Debug.Log("Connection closed!");
-        };
-
-        websocket.OnMessage += (bytes) =>
-        {
-            // getting the message as a string
-            wsLastMessage = System.Text.Encoding.UTF8.GetString(bytes);
-            SendSampleData(wsLastMessage);
-            //Debug.Log("OnMessage! " + wsLastMessage);
-        };
-
-        // waiting for messages
-        await websocket.Connect();
-    }
-
-    void Update()
-    {
-#if !UNITY_WEBGL || UNITY_EDITOR
-        websocket.DispatchMessageQueue();
-#endif
-        if(textfield != null) textfield.text = wsLastMessage;
-    }
-
-    public void SendSampleData(string data)
-    {
-        wsLastMessage = data;
-        foreach (var item in motionObjects)
-        {
-            item.UpdateData(System.Text.Encoding.UTF8.GetBytes(data));
-        }
-    }
-
-    private async void OnApplicationQuit()
-    {
-        await websocket.Close();
-    }
-
-}
-
-public class WsSampleTransmitter : MonoBehaviour
-{
-    public string fileName = "full-2.txt";
-    private string line;
-    private string[] lines;
-    private int currentIndex;
-    
-    [SerializeField][Min(0.001f)] private float messageDelay = 0.2f;
-    private WsClient wsC;
-
-    public void Start()
-    {
-        wsC = GetComponent<WsClient>();
-        fileName = Path.Combine(Application.streamingAssetsPath, fileName);
-        // Read the text file and split it into lines
-        string text = File.ReadAllText(fileName);
-        lines = text.Split('\n');
-
-        currentIndex = 0;
-
-        StartCoroutine(SendMessage());
-    }
-
-    IEnumerator SendMessage()
-    {
-        while(true)
-        {
-            if (currentIndex < lines.Length)
+            websocket.OnError += (e) =>
             {
-                line = lines[currentIndex].Trim();
-                if (!string.IsNullOrEmpty(line))
+                Debug.Log("Error! " + e);
+                if (SampleDataStream)
                 {
-                    wsC.SendSampleData(line);
-                    //Debug.Log("Sent: " + line);
+                    wsST = gameObject.AddComponent<WsSampleTransmitter>();
                 }
+            };
 
-                currentIndex++;
-                
-            }
-            else
+            websocket.OnClose += (e) =>
             {
-                currentIndex = 0;
-            }
-            yield return new WaitForSecondsRealtime(messageDelay);
+                Debug.Log("Connection closed!");
+            };
+
+            websocket.OnMessage += (bytes) =>
+            {
+                // getting the message as a string
+                wsLastMessage = System.Text.Encoding.UTF8.GetString(bytes);
+                SendSampleData(wsLastMessage);
+                //Debug.Log("OnMessage! " + wsLastMessage);
+            };
+
+            // waiting for messages
+            await websocket.Connect();
         }
+
+        void Update()
+        {
+    #if !UNITY_WEBGL || UNITY_EDITOR
+            websocket.DispatchMessageQueue();
+    #endif
+            if(textfield != null) textfield.text = wsLastMessage;
+        }
+
+        public void SendSampleData(string data)
+        {
+            wsLastMessage = data;
+            foreach (var item in motionObjects)
+            {
+                item.UpdateData(System.Text.Encoding.UTF8.GetBytes(data));
+            }
+        }
+
+        private async void OnApplicationQuit()
+        {
+            await websocket.Close();
+        }
+
     }
+
+    public class WsSampleTransmitter : MonoBehaviour
+    {
+        public string fileName = "full-2.txt";
+        private string line;
+        private string[] lines;
+        private int currentIndex;
+    
+        [SerializeField][Min(0.001f)] private float messageDelay = 0.2f;
+        private WsClient wsC;
+
+        public void Start()
+        {
+            wsC = GetComponent<WsClient>();
+            fileName = Path.Combine(Application.streamingAssetsPath, fileName);
+            // Read the text file and split it into lines
+            string text = File.ReadAllText(fileName);
+            lines = text.Split('\n');
+
+            currentIndex = 0;
+
+            StartCoroutine(SendMessage());
+        }
+
+        IEnumerator SendMessage()
+        {
+            while(true)
+            {
+                if (currentIndex < lines.Length)
+                {
+                    line = lines[currentIndex].Trim();
+                    if (!string.IsNullOrEmpty(line))
+                    {
+                        wsC.SendSampleData(line);
+                        //Debug.Log("Sent: " + line);
+                    }
+
+                    currentIndex++;
+                
+                }
+                else
+                {
+                    currentIndex = 0;
+                }
+                yield return new WaitForSecondsRealtime(messageDelay);
+            }
+        }
   
+    }
 }

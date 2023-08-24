@@ -6,6 +6,6 @@ public class setWebcam : MonoBehaviour
 {
     public void SetWebcam(int i)
     {
-        WebcamManager.Instance.deviceIndex = (ushort)i;
+        TwinPlanets.WebcamManager.Instance.deviceIndex = (ushort)i;
     }
 }

@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Samples/Media Wall/Examples/Webcam/Scene/Webcam.unity
-    guid: c3fee835fb43a1149bbf6d8e6b81abd0
+    path: Assets/Samples/SampleScenes/Avant-Now/Scenes/AvantNow-BodyTracking.unity
+    guid: 67fb703659aa4e147ac97f216510bdec
   m_configObjects: {}

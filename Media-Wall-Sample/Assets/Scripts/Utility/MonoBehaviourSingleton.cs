@@ -1,24 +1,27 @@
 using UnityEngine;
 using System.Collections;
 
-//Generic Singleton classes for Unity. Use MonoBehaviourSingletonPersistent for any singleton that must survive a level load. 
-public class MonoBehaviourSingleton<T> : MonoBehaviour
-	where T : Component
+namespace TwinPlanets
 {
-    private static T _instance;
-
-    public static T Instance { get { return _instance; } }
-
-
-    private void Awake()
+    //Generic Singleton classes for Unity. Use MonoBehaviourSingletonPersistent for any singleton that must survive a level load. 
+    public class MonoBehaviourSingleton<T> : MonoBehaviour
+	    where T : Component
     {
-        if (_instance != null && _instance != this)
+        private static T _instance;
+
+        public static T Instance { get { return _instance; } }
+
+
+        private void Awake()
         {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this.GetComponent<T>();
+            if (_instance != null && _instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                _instance = this.GetComponent<T>();
+            }
         }
     }
 }
