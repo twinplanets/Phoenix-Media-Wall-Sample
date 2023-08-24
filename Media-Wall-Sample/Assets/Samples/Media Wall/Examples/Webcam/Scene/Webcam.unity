@@ -189,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3318879706571844622, guid: 76ab5fc872dc784439eea1705e6feb87, type: 3}
       propertyPath: cycleCameras
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3318879706571844622, guid: 76ab5fc872dc784439eea1705e6feb87, type: 3}
       propertyPath: debugDeviceText

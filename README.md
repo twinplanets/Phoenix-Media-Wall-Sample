@@ -86,10 +86,10 @@ To add the webcam footage to your scene, either as a fullscreen UI element or as
 
 ## The device index value represents the webcam device to access. The media wall has multiple, and the index values refer to;
 
-- Anker PowerConf C300
-- ZED 2
-- Blackmagic WDM Capture
-- Decklink Video Captures
+- Anker PowerConf C300 = Anker Webcam
+- ZED 2 = Stereo Output
+- Blackmagic WDM Capture = Blackmagic Capture Card EG The Mac
+- Decklink Video Capture = The Webcam
 
 To get the webcam to work on the Media Wall, the 'Require User Authentication' box needs to be unticked. However, you may find that to access the webcam on your device, it needs to be checked.
 

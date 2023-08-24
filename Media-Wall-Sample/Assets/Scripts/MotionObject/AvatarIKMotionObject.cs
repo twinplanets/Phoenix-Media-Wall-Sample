@@ -119,37 +119,43 @@ public class IKMotionSkeleton : MonoBehaviour
                 Quaternion finalRotation = rotation * zRotation;
 
                 _animator.bodyRotation = finalRotation;
+
+                //----------Head----------\\
+                triangleNormal = CalculateLocalTriangleNormal(_skeleton.joints[28], _skeleton.joints[30], _skeleton.joints[27], _animator.GetBoneTransform(HumanBodyBones.Hips).forward, _animator.GetBoneTransform(HumanBodyBones.Hips).up);
+                _animator.SetBoneLocalRotation(HumanBodyBones.Head, Quaternion.LookRotation(triangleNormal, Vector3.up));
+
+                /*/----------Head----------\\
+                triangleNormal = CalculateTriangleNormal(_skeleton.joints[28], _skeleton.joints[30], _skeleton.joints[27]);
+                _animator.SetBoneLocalRotation(HumanBodyBones.Head, Quaternion.LookRotation(triangleNormal, Vector3.up));
+
+                //----------Head----------\\
+                triangleNormal = CalculateTriangleNormal(_skeleton.joints[28], _skeleton.joints[30], _skeleton.joints[27]);
+
+                // Calculate the rotation of the head bone in world space, considering the hip rotation
+                Quaternion hipRotation = _animator.GetBoneTransform(HumanBodyBones.Hips).rotation;
+
+                // Convert triangleNormal to head bone's local space
+                Quaternion localTriangleNormal = Quaternion.Inverse(hipRotation) * Quaternion.LookRotation(triangleNormal, Vector3.up);
+
+                // Set the local rotation of the head bone
+                _animator.SetBoneLocalRotation(HumanBodyBones.Head, localTriangleNormal); */
+
+                //----------Right Hand----------\\
+                _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+                _animator.SetIKPosition(AvatarIKGoal.RightHand, (Vector3.Scale(_skeleton.joints[7], scaleFactor)));
+
+                //----------Right Foot----------\\
+                _animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
+                _animator.SetIKPosition(AvatarIKGoal.RightFoot, (Vector3.Scale(_skeleton.joints[19], scaleFactor)));
+
+                //----------Left Hand----------\\
+                _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+                _animator.SetIKPosition(AvatarIKGoal.LeftHand, (Vector3.Scale(_skeleton.joints[14], scaleFactor)));
+
+                //----------Left Foot----------\\
+                _animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
+                _animator.SetIKPosition(AvatarIKGoal.LeftFoot, (Vector3.Scale(_skeleton.joints[23], scaleFactor)));
             }
-
-            //----------Head----------\\
-            triangleNormal = CalculateTriangleNormal(_skeleton.joints[28], _skeleton.joints[30], _skeleton.joints[27]);
-            //_animator.SetBoneLocalRotation(HumanBodyBones.Head, Quaternion.LookRotation(triangleNormal, Vector3.up));
-
-            // Calculate the rotation of the head bone in world space, considering the hip rotation
-            Quaternion hipRotation = _animator.GetBoneTransform(HumanBodyBones.Hips).rotation;
-
-            // Convert triangleNormal to head bone's local space
-            Quaternion localTriangleNormal = Quaternion.Inverse(hipRotation) * Quaternion.LookRotation(triangleNormal, Vector3.up);
-
-            // Set the local rotation of the head bone
-            _animator.SetBoneLocalRotation(HumanBodyBones.Head, localTriangleNormal);
-
-            //----------Right Hand----------\\
-            _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-            _animator.SetIKPosition(AvatarIKGoal.RightHand, (Vector3.Scale(_skeleton.joints[7], scaleFactor)));
-
-            //----------Right Foot----------\\
-            _animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
-            _animator.SetIKPosition(AvatarIKGoal.RightFoot, (Vector3.Scale(_skeleton.joints[19], scaleFactor)));
-
-            //----------Left Hand----------\\
-            _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
-            _animator.SetIKPosition(AvatarIKGoal.LeftHand, (Vector3.Scale(_skeleton.joints[14], scaleFactor)));
-
-            //----------Left Foot----------\\
-            _animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
-            _animator.SetIKPosition(AvatarIKGoal.LeftFoot, (Vector3.Scale(_skeleton.joints[23], scaleFactor)));
-
         }
     }
 
@@ -159,6 +165,19 @@ public class IKMotionSkeleton : MonoBehaviour
         Vector3 AC = vertexC - vertexA;
 
         Vector3 normal = Vector3.Cross(AB, AC).normalized;
+
+        return normal;
+    }
+
+    private Vector3 CalculateLocalTriangleNormal(Vector3 vertexA, Vector3 vertexB, Vector3 vertexC, Vector3 customForward, Vector3 customUp)
+    {
+        Vector3 AB = vertexB - vertexA;
+        Vector3 AC = vertexC - vertexA;
+
+        // Calculate the new normal using the custom forward and up directions
+        Vector3 normal = Vector3.Cross(AB, AC).normalized;
+        Quaternion rotation = Quaternion.LookRotation(customForward, customUp);
+        normal = rotation * normal;
 
         return normal;
     }
