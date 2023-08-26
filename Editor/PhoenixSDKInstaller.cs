@@ -89,7 +89,7 @@ public class PhoenixSDKInstaller : EditorWindow
         float buttonHeight = 3 * EditorGUIUtility.singleLineHeight;
 
         // Center buttons
-        GUILayout.BeginArea(new Rect(padding, (position.height / 2) - buttonHeight, buttonWidth, 2 * buttonHeight + padding));
+        GUILayout.BeginArea(new Rect(padding, (position.height / 2) - (1.5f * buttonHeight), buttonWidth, 3 * buttonHeight + 2 * padding));
 
         // Button to install Native Websockets
         if (GUILayout.Button("Install Native Websockets", GUILayout.Width(buttonWidth), GUILayout.Height(buttonHeight)))
