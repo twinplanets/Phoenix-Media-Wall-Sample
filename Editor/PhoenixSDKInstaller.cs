@@ -16,6 +16,7 @@ public class PhoenixSDKInstaller : EditorWindow
     [InitializeOnLoadMethod]
     private static void Init()
     {
+        timer = 0f;
         string versionFilePath = "Packages/com.twinplanets.phoenix-media-wall-unity-sdk/version.txt";
         string packageJsonPath = "Packages/com.twinplanets.phoenix-media-wall-unity-sdk/package.json";
 
@@ -258,6 +259,5 @@ public class PhoenixSDKInstaller : EditorWindow
                 Debug.LogWarning("Failed to set define for " + group.ToString() + ": " + e.Message);
             }
         }
-        StartCoroutine(WaitAndRefresh());
     }
 }
