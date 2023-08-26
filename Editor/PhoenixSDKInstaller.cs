@@ -8,6 +8,8 @@ public class PhoenixSDKInstaller : EditorWindow
 {
     Texture2D logo;
 
+    private bool isRefreshing = true; // Variable to keep track of the refresh state
+
     [InitializeOnLoadMethod]
     private static void Init()
     {
@@ -79,6 +81,7 @@ public class PhoenixSDKInstaller : EditorWindow
         }
 
         // Display package name
+        string titleText = isRefreshing ? "Installing Native Websocket..." : "Package Installer";
         GUILayout.Label("Package Installer", EditorStyles.boldLabel);
 
         // Padding for buttons
@@ -138,7 +141,21 @@ public class PhoenixSDKInstaller : EditorWindow
             Debug.Log("Native Websockets already installed.");
         }
     }
+    IEnumerator WaitAndRefresh()
+    {
+        // Wait for 10 seconds
+        yield return new WaitForSecondsRealtime(10);
 
+        // Refresh the Asset Database
+        AssetDatabase.Refresh();
+        Debug.Log("Asset Database Refreshed");
+
+        // Update the refresh state
+        isRefreshing = false;
+
+        // Repaint the Editor Window to reflect the new title
+        Repaint();
+    }
     public static void MoveWebGLTemplate()
     {
         string sourcePath = "Packages/com.twinplanets.phoenix-media-wall-unity-sdk/WebGLTemplates";
@@ -229,6 +246,6 @@ public class PhoenixSDKInstaller : EditorWindow
                 Debug.LogWarning("Failed to set define for " + group.ToString() + ": " + e.Message);
             }
         }
-        AssetDatabase.Refresh();
+        StartCoroutine(WaitAndRefresh());
     }
 }
