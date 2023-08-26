@@ -104,7 +104,7 @@ public class PhoenixSDKInstaller : EditorWindow
 
         // Display package name
         string titleText = isRefreshing ? "Installing Native Websocket..." : "Package Installer";
-        GUILayout.Label("Package Installer", EditorStyles.boldLabel);
+        GUILayout.Label(titleText, EditorStyles.boldLabel);
 
         // Padding for buttons
         float padding = 10f;
