@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using System;
 using System.IO;
+using System.Collections
 using System.Collections.Generic;
 
 public class PhoenixSDKInstaller : EditorWindow
@@ -144,7 +145,7 @@ public class PhoenixSDKInstaller : EditorWindow
     IEnumerator WaitAndRefresh()
     {
         // Wait for 10 seconds
-        yield return new WaitForSecondsRealtime(10);
+        yield return new EditorWaitForSeconds(10);
 
         // Refresh the Asset Database
         AssetDatabase.Refresh();
