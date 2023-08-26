@@ -1,10 +1,10 @@
 # Introduction
 
-This project is designed to assist artists with creating content for the media wall at Phoenix Cinema and Arts Centre, Leicester, UK. They are split into two sections, the Unity 2022(LTS) Sample, and the Unity 2022(LTS) Template. You can find the documentation for the Javascript web sample here: https://github.com/PhoenixDigiArt/media-wall-webapp-sample.
+This project is designed to assist artists with creating content for the media wall at Phoenix Cinema and Arts Centre, Leicester, UK. They are split into two sections, the Unity 2022(LTS) Sample, and the Unity 2022(LTS) Package. You can find the documentation for the Javascript web sample here: https://github.com/PhoenixDigiArt/media-wall-webapp-sample.
 
-In this repository, there are two options for your project, the Media-Wall Sample source code and the Media Wall Package (Found in the GitHub repository Releases page), and as the name suggests, the sample includes sample scenes with custom code. In contrast, the package installs the required functionality into your own project.
+In this repository, there are two options for your project, the Media-Wall Sample source code and the Media Wall Package (Found in the GitHub upm branch), and as the name suggests, the sample includes sample project. In contrast, the package installs the required functionality and the samples into your own project.
 
-This document should be used as a guide on using the Media-Wall plugin for Unity, which can be downloaded as a Unity Package file from the repository releases page. To learn about Unity, please refer to the Unity Learn and Unity Documentation web pages for guidance.
+This document should be used as a guide on using the Media-Wall plugin for Unity, which can be downloaded through the Unity package manager. To learn about Unity, please refer to the Unity Learn and Unity Documentation web pages for guidance.
 
 ### Recommendations
 
@@ -22,15 +22,32 @@ If you are using Unity 2022, but the subversion isn't 2022.3.6f1, they you will 
 ### Dependancies
 
 The Unity Project depends on the Native Websocket API package by Endal on GitHub, this package can be added to your project using the Unity Package Manager. Open the Package Manager window, Press the + in the upper left and click and from Git URL. The URL is: https://github.com/endel/NativeWebSocket.git#upm
+
+INFORMATION: Downloading this package through the Unity Package Manager (Refer to Install option 1) installs this for you, you only need to ensure you have it installed when downloading the sample project instead of the package.
+
 ![Screenshot](Docs/packagemanagergit.png)
 
-### Adding the Media Wall Package to your project
+## Install Option 1 (RECOMMENDED): Installing the Package using the Unity Package Manager
 
-Visit the releases page on the GitHub repository and download the latest stable release. Open your Unity 2022(LTS) project (or create a new one), and then drag the package into the Project window. You will then be asked to import all of the contents. Once imported, all the necessary scripts will be in your project, however you may have to manually add Native Web Sockets by Endel, which can be done by following the prior instructions.
+Once in your Unity project, open Window > Package Manager (Located on the top menu bar). Then, in the package manager, click the Plus icon in the top right of the window and click Add package by git URL... The URL to Enter is:
 
-### Opening the Media Wall Sample
+https://github.com/twinplanets/Phoenix-Media-Wall-Unity-SDK.git#upm
+
+Once added, the package should install. Once installed, the package installer window should appear. If not, navigate to 'Window > Show Phoenix SDK Installer' to open the installer manually.
+
+First click the Install Native Websockets button and wait for it to install. Unity may give you critical errors during the install, if these havent disappeared within a few minutes, try reopening your project.
+
+Secondly, click the Install WebGLTemplate and Install StreamingAssets button. These add the template to build the app for the media wall, and the debug data for the bodytracking to the assets folder.
+
+Finally, you can close the installer. In the package manager, you can install two sample scenes that use the bodytracking and the webcam, along with a set of scene prefabs that set out a template scene.
+
+## Install option 2: Opening the Media Wall Sample
 
 Either use Git to clone the repository or download the source code from the Github page. Once downloaded, open Unity Hub and open the Media-Wall Sample project in Unity2022(LTS) with WebGL support.
+
+# Quick-Start Guide
+
+Once you have your scene set-up, you are free to use Unity to develop your scene. Make sure you develop everything to work with the WebGL player of Unity, as it has different requirements to standalone development. The Unity Documentation and Forums have extensive resources on what can and can't be done in WebGL. To access the bodytracking data, you have to create a gameobject with an instance of the Motion Object class, and include it in the WsClient's list of game objects.
 
 ### Creating a bodytracking scene
 
@@ -52,10 +69,6 @@ Finally, there is the Sample Data Stream button. If checked, the Ws Client will 
 
 In the prefab folder, there is a folder containing everything needed named Scene. In this folder you can find everything needed for bodytracking already set-up. For instance, you can see the rotation of the ground plane and camera in the Rendering and Level prefab. This is to compensate for the angle that the Zed2 camera is placed at.
 
-# Quick-Start Guide
-
-Once you have your scene set-up, you are free to use Unity to develop your scene. Make sure you develop everything to work with the WebGL player of Unity, as it has different requirements to standalone development. The Unity Documentation and Forums have extensive resources on what can and can't be done in WebGL. To access the bodytracking data, you have to create a gameobject with an instance of the Motion Object class, and include it in the WsClient's list of game objects.
-
 ### Motion Object
 
 The Motion Object class reads the bodytracking data and instantiates a Skeleton for each collection of joints in the data. If multiple Motion Objects are referenced in the WsClient, the Skeletons will be duplicated for each system.
@@ -71,6 +84,8 @@ Either use one of the following classes that overrides Motion Object, or create 
 The debug motion object class in this package creates simple gameobjects to represent the bodytracking data. Once added to the Websocket Client Motion Objects array, the Debug Motion Object class will instantiate each skeleton in the bodytracking data. This is useful as a comparison tool to ensure that the bodytracking data is being accurately represented. (Tip: Rendering your character as 50% transparent in the material properties allows you to see the debug skeleton joints when they render inside the character body)
 
 ![Screenshot](Docs/debugmotionobject.png)
+
+INFORMATION: The debug data was recorded with the camera at a different angle, so it will not line up with the prefab scene. This is okay, as when tested on the media wall you will see it lines up correctly.
 
 #### AvatarIK skeleton
 
