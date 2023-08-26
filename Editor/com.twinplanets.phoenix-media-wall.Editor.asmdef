@@ -1,0 +1,6 @@
+{
+  "name": "com.twinplanets.phoenix-media-wall=unity-sdk.Editor",
+  "references": ["com.twinplanets.phoenix-media-wall=unity-sdk.Runtime"],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": []
+}
