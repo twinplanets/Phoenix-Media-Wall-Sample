@@ -159,6 +159,7 @@ public class PhoenixSDKInstaller : EditorWindow
             AssetDatabase.Refresh();
             Debug.Log("Native Websockets installed at the top of the manifest.");
 
+            isRefreshing = true;
             timer = refreshTime;
             EditorApplication.update += StaticUpdate;
             AddDefineSymbol();
