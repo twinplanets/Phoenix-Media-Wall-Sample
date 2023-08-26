@@ -1,8 +1,8 @@
 {
-    "name": "com.twinplanets.phoenix-media-wall",
+    "name": "com.twinplanets.phoenix-media-wall.Runtime",
     "rootNamespace": "",
     "references": [
-        "endel.nativewebsocket"
+        "GUID:04376767bc1f3b428aefa3d20743e819"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

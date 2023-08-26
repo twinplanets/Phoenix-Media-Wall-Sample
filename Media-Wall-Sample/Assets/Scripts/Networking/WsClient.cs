@@ -5,12 +5,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+#if NATIVE_WEBSOCKETS_INSTALLED
+
 using NativeWebSocket;
+
+#endif
 
 namespace TwinPlanets.PhoenixMediaWall
 {
     public class WsClient : Utility.MonoBehaviourSingleton<WsClient>
     {
+#if NATIVE_WEBSOCKETS_INSTALLED
         WebSocket websocket;
         public MotionObject[] motionObjects;
         [SerializeField] Text textfield;
@@ -56,9 +61,9 @@ namespace TwinPlanets.PhoenixMediaWall
 
         void Update()
         {
-    #if !UNITY_WEBGL || UNITY_EDITOR
+#if !UNITY_WEBGL || UNITY_EDITOR
             websocket.DispatchMessageQueue();
-    #endif
+#endif
             if(textfield != null) textfield.text = wsLastMessage;
         }
 
@@ -75,11 +80,12 @@ namespace TwinPlanets.PhoenixMediaWall
         {
             await websocket.Close();
         }
-
+#endif
     }
 
     public class WsSampleTransmitter : MonoBehaviour
     {
+#if NATIVE_WEBSOCKETS_INSTALLED
         public string fileName = "full-2.txt";
         private string line;
         private string[] lines;
@@ -124,6 +130,6 @@ namespace TwinPlanets.PhoenixMediaWall
                 yield return new WaitForSecondsRealtime(messageDelay);
             }
         }
-  
+#endif  
     }
 }

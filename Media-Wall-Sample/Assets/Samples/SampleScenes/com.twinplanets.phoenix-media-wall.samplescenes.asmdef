@@ -1,8 +1,8 @@
 {
-    "name": "com.twinplanets.phoenix-media-wall.sample",
+    "name": "com.twinplanets.phoenix-media-wall.samplescenes",
     "rootNamespace": "",
     "references": [
-        "com.twinplanets.phoenix-media-wall"
+        "com.twinplanets.phoenix-media-wall.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
