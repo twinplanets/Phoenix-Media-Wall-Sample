@@ -10,7 +10,7 @@ public class PhoenixSDKInstaller : EditorWindow
     Texture2D logo;
 
     private static bool isRefreshing = false; // Variable to keep track of the refresh state
-    private static float refreshTime = 10f;
+    private static float refreshTime = 1000f;
     private static float timer;
 
     [InitializeOnLoadMethod]
