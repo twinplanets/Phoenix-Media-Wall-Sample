@@ -9,7 +9,9 @@ public class PhoenixSDKInstaller : EditorWindow
 {
     Texture2D logo;
 
-    private bool isRefreshing = true; // Variable to keep track of the refresh state
+    private bool isRefreshing = false; // Variable to keep track of the refresh state
+    private float refreshTime = 10f;
+    private float timer;
 
     [InitializeOnLoadMethod]
     private static void Init()
@@ -50,6 +52,24 @@ public class PhoenixSDKInstaller : EditorWindow
     {
         EditorApplication.update -= RunOnce;
         ShowWindow();
+    }
+
+    private static void StaticUpdate()
+    {
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            // Refresh the Asset Database
+            AssetDatabase.Refresh();
+            Debug.Log("Asset Database Refreshed");
+
+            // Update the refresh state
+            isRefreshing = false;
+
+            // Remove the update function since it's no longer needed
+            EditorApplication.update -= StaticUpdate;
+        }
     }
 
     public static void ShowWindow()
@@ -131,10 +151,15 @@ public class PhoenixSDKInstaller : EditorWindow
         {
             int index = manifestText.IndexOf("\"dependencies\": {");
             index += "\"dependencies\": {".Length;
+
             manifestText = manifestText.Insert(index, "\n    " + newPackage + ",");
             File.WriteAllText(manifestPath, manifestText);
+
             AssetDatabase.Refresh();
             Debug.Log("Native Websockets installed at the top of the manifest.");
+
+            timer = refreshTime;
+            EditorApplication.update += StaticUpdate;
             AddDefineSymbol();
         }
         else
@@ -142,21 +167,7 @@ public class PhoenixSDKInstaller : EditorWindow
             Debug.Log("Native Websockets already installed.");
         }
     }
-    IEnumerator WaitAndRefresh()
-    {
-        // Wait for 10 seconds
-        yield return new WaitForSecondsRealtime(10);
 
-        // Refresh the Asset Database
-        AssetDatabase.Refresh();
-        Debug.Log("Asset Database Refreshed");
-
-        // Update the refresh state
-        isRefreshing = false;
-
-        // Repaint the Editor Window to reflect the new title
-        Repaint();
-    }
     public static void MoveWebGLTemplate()
     {
         string sourcePath = "Packages/com.twinplanets.phoenix-media-wall-unity-sdk/WebGLTemplates";
