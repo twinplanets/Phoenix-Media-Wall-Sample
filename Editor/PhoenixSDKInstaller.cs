@@ -145,7 +145,7 @@ public class PhoenixSDKInstaller : EditorWindow
     IEnumerator WaitAndRefresh()
     {
         // Wait for 10 seconds
-        yield return new EditorWaitForSeconds(10);
+        yield return new WaitForSecondsRealtime(10);
 
         // Refresh the Asset Database
         AssetDatabase.Refresh();
