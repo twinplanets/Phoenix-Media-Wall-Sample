@@ -140,6 +140,11 @@ public class PhoenixSDKInstaller : EditorWindow
         }
 
         GUILayout.EndArea();
+
+        if (isRefreshing)
+        {
+            Repaint();
+        }
     }
 
     void InstallNativeWebsockets()
